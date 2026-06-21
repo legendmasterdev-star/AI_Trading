@@ -1,0 +1,5 @@
+MetaTrader5
+pandas
+python-dotenv
+fastapi
+uvicorn[standard]

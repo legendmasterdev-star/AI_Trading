@@ -1,0 +1,11 @@
+# Python
+__pycache__/
+
+# Environment/secrets
+.env
+frontend/dist
+node_modules
+*.db
+*.log
+*.err
+*.tmp.*
