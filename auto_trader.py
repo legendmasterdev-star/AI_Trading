@@ -6,6 +6,7 @@ from trading_backend.execution import OrderExecutor
 from trading_backend.market_data import MarketDataService
 from trading_backend.mt5_client import MT5Connection
 from trading_backend.settings import load_settings
+from trading_backend.custom_strategies import register_custom_strategies
 from trading_backend.strategies import StrategyEngine
 
 
@@ -71,6 +72,9 @@ def run_auto_trader() -> None:
     connection = MT5Connection(settings)
     market_data = MarketDataService(connection)
     strategy_engine = StrategyEngine(market_data)
+    # Use the custom per-pair strategies (same as the dashboard in api.py).
+    # Comment out to fall back to the default EMA/RSI/MACD strategies.
+    register_custom_strategies(strategy_engine)
     ai_engine = AIDecisionEngine(strategy_engine, market_data)
     executor = OrderExecutor(connection, market_data)
 

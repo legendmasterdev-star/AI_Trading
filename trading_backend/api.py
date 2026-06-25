@@ -22,6 +22,11 @@ settings = load_settings()
 connection = MT5Connection(settings)
 market_data = MarketDataService(connection)
 strategy_engine = StrategyEngine(market_data)
+# Activate the custom per-pair strategies. Comment this out to fall back to the
+# default EMA/RSI/MACD strategies in trading_backend/strategies.py.
+from .custom_strategies import register_custom_strategies  # noqa: E402
+
+register_custom_strategies(strategy_engine)
 ai_engine = AIDecisionEngine(strategy_engine, market_data)
 executor = OrderExecutor(connection, market_data)
 auth_service = AuthService()
